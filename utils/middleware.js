@@ -13,7 +13,12 @@ const unknownEndpoint = (req,res) => {
 }
 
 const errorHandler = (error,req,res,next) => {
-    logger.error(error.message)
+    
+    if (error.name=="CastError"){
+        res.status(400).send('mal formatted id')
+    }
+
+    logger.error(error.name)
     next(error)
 }
 

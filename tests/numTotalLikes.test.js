@@ -88,7 +88,6 @@ describe ('Num of likes', () =>{
 
     test('Getting favorite one',()=>{
         const favoriteBlog = favorite(blogs)
-        console.log('favoriteBlog :>> ', favoriteBlog);
         assert.deepStrictEqual(favoriteBlog,blogs[2])
     })
     

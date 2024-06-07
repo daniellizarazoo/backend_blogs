@@ -4,21 +4,24 @@ const { error } = require('../utils/logger')
 
 // This are working on /api/blogs
 
-blogsRouter.get('/',(req,res,next)=>{
-    Blog.find({})
-        .then((blogs)=>{
-            res.status(201).send(blogs)
-        })
-        .catch(err=>next(err))
+blogsRouter.get('/',async (req,res)=>{
+    
+    const blogs = await Blog.find({})
+    res.json(blogs)
+
 })
 
-blogsRouter.post('/',(req,res,next)=>{
+blogsRouter.post('/',async (req,res)=>{
     const blog = new Blog(req.body)
-    blog.save()
-        .then((result)=>{
-            res.status(201).json(result)
-        })
-        .catch(err=>next(err))
+
+    const result = await blog.save()
+    res.status(201).json(result)
+})
+
+blogsRouter.get('/:id?',async (req,res)=>{
+    const id = req.params.id
+    const blog = await Blog. findById (id)
+    res.status(200).json(blog)
 })
 
 module.exports= blogsRouter
