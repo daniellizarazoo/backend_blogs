@@ -11,6 +11,13 @@ blogsRouter.get('/',async (req,res)=>{
     res.json(blogs)
 })
 
+blogsRouter.get('/fromuser', async (req,res)=>{
+    const userId = req.userId
+    const blogsByUser = await Blog.find({userAuthor:userId})
+    res.status(201).json(blogsByUser)
+
+})
+
 blogsRouter.get('/user/:Userid',async (req,res)=>{
     const UserId = req.params.Userid
 
